@@ -7,6 +7,10 @@ import TodoList from "./component/toDoList";
 import TodoForm from "./component/toDoForm";
 import Postlist from "./component/postList";
 import Pagination from "./component/pagination";
+import PostFilterForm from "./component/postFillterForm";
+import Clock from "./component/Clock";
+import BetterClock from "./component/betterClock";
+import MagicBox from "./component/magicBox";
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -46,6 +50,7 @@ function App() {
     _limit: 10,
     _page: 1,
   });
+
   // PostList
   useEffect(() => {
     async function fetchPostList() {
@@ -75,13 +80,30 @@ function App() {
     });
   }
 
+  function handleFilterChange(newFilter) {
+    console.log("new filter", newFilter);
+    setFillter({
+      ...fillter,
+      _page: 1,
+      title_like: newFilter.search,
+    });
+  }
+
+  const [showClock, setShowClock] = useState(true);
   return (
     <div className="App">
       <h1>Welcome react hook - postlist</h1>
+
+      <MagicBox />
+
+      {/* {showClock && <Clock />}
+      <BetterClock />
+      <button onClick={() => setShowClock(false)}>Hide clock</button> */}
       {/* <TodoList todos={todoList} onTodoClick={handleClick} />
       <TodoForm onSubmit={handleTodoFormSubmit} /> */}
+      {/* <PostFilterForm onSubmit={handleFilterChange} />
       <Postlist posts={postList} />
-      <Pagination pagination={pagination} onPageChange={handlePageChange} />
+      <Pagination pagination={pagination} onPageChange={handlePageChange} /> */}
     </div>
   );
 }
